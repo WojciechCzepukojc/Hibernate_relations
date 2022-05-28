@@ -23,11 +23,8 @@ public class Parent {
 
     private String lastName;
 
-    @JoinTable(name = "join_parent_child",
-            joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "child_id", referencedColumnName = "id")
-    )
-    @ManyToMany
+
+    @ManyToMany(mappedBy = "parents")
     private List<Child> children;
 
 }

@@ -6,10 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,6 +23,15 @@ public class Child {
     private String firstName;
 
     private String lastName;
+
+    @JoinTable(name = "join_parent_child",
+            joinColumns = @JoinColumn(name = "child_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id")
+    )
+
+    @ManyToMany
+    private List<Parent> parents;
+
 
 
 

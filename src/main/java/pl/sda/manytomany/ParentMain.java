@@ -18,8 +18,8 @@ public class ParentMain {
         Parent parent1 = new Parent(null, "Jan", "Kowalski", null);
         Parent parent2 = new Parent(null, "Anna", "Kowalska", null);
 
-        Child child1 = new Child(null, "Michał", "Kowalski");
-        Child child2 = new Child(null, "Kasia", "Kowalska");
+        Child child1 = new Child(null, "Michał", "Kowalski", Arrays.asList(parent1,parent2));
+        Child child2 = new Child(null, "Kasia", "Kowalska", Arrays.asList(parent1,parent2));
 
         parent1.setChildren(Arrays.asList(child1, child2));
         parent2.setChildren(Arrays.asList(child1, child2));
@@ -31,6 +31,9 @@ public class ParentMain {
 
         Parent parentFromDB = session.get(Parent.class, 1);
         parentFromDB.getChildren().forEach(c -> System.out.println(c.getFirstName()));
+
+        Child childFromDB = session.get(Child.class, 1);
+        childFromDB.getParents().forEach(p -> System.out.println(p.getFirstName()));
 
         transaction.commit();
         session.close();
